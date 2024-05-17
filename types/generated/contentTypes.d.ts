@@ -362,30 +362,57 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+
+export interface ApiCustomerCustomer extends Schema.CollectionType {
+  collectionName: 'customers';
+  info: {
+    singularName: 'customer';
+    pluralName: 'customers';
+    displayName: 'customer';
+    description: '';
+
 export interface ApiCategoryCategory extends Schema.CollectionType {
   collectionName: 'categories';
   info: {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+
+    customerID: Attribute.Integer & Attribute.Required;
+    Name: Attribute.String & Attribute.Required;
+    Type: Attribute.String & Attribute.Required;
+    Phone: Attribute.BigInteger & Attribute.Required;
+    Email: Attribute.Email & Attribute.Required;
+    Telegram: Attribute.String & Attribute.Required;
+
     categoryID: Attribute.Integer & Attribute.Required;
     name: Attribute.String & Attribute.Required;
+
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
+
+      'api::customer.customer',
+
       'api::category.category',
+
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
+
+      'api::customer.customer',
+
       'api::category.category',
+
       'oneToOne',
       'admin::user'
     > &
@@ -829,7 +856,11 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+
+      'api::customer.customer': ApiCustomerCustomer;
+
       'api::category.category': ApiCategoryCategory;
+
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
